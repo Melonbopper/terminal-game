@@ -43,7 +43,7 @@ while True:
 
         while True:
             action=input("\nType pull to bring in space debris, Type back to disengage the GravSweep:  ").strip().lower()
-            space_debris = random.randint(0, 7)
+            space_debris = random.randint(0, 251)
 
             if action == "pull":
 
