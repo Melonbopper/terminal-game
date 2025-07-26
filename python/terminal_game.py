@@ -72,6 +72,7 @@ while True:
 
                     if space_debris % 5 == 0:
                         looking = ("\nYou found a [PHASE GEAR MANIFOLD!]") #Finally found it
+                        print("HEY! THERE IT IS!!!")
                         print(looking)
                         print("Finally...")
                         print("\nGo 'back' to repair the ship!")
@@ -154,3 +155,5 @@ while True:
             break
     else:
         print(f"\nCommand Error: '{path}' is not a recognized command. Please type: search, repair, coffee, or quit.")
+
+# I'm pretty sure this is the end of the game, I feel like it's pretty good for a first try
