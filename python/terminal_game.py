@@ -30,9 +30,9 @@ repair = 0
 looking = 0
 pull = 0
 ship_repaired = 0
-space_debris = random.randint(1, 256) # You see  256? Huh? Pretty funny huh? ...no? get a sense of humor smh...
-search_needed = random.randint(1, 20) # Player item finding range
+space_debris = random.randint(1, 26)
 looking = ("You found a [PHASE GEAR MANIFOLD!]") #Finally found it
+
 
 while True:
     print("\nsearch. repair. coffee. quit.")
@@ -40,19 +40,25 @@ while True:
     if path == "search":
         print("\n...Engaging GravSweep... ")
         action=input("\nType pull to bring in space debris:  ")
-        if action == "pull" and space_debris % 5:
+        if action == "pull" and space_debris % 3:
             pull = pull + 1
-            print("\nDamn...another Null Coil Cap")
+            print("===============================")
+            print("Damn...another Null Coil Cap")
+            print("===============================")
+        elif pull < 1:
+            pull = pull + 1
+            print("==============================================================")
+            print("Where would an Auxiliary Coupler Ring come from way out here?")
+            print("==============================================================")
         elif pull >= 10:
+                print("=======================")
                 print("\nGravSweep Overheated")
                 pull = 0 # Reset pull count
-        elif pull >= 1 and space_debris % 3 == 0 and search_needed == (5, 15):
+        elif pull >= 1 and space_debris % 5:
             print(looking)
             repair = repair + 1
         elif pull >= 4:
-            search == search + 2
-        elif action == "quit":
-            print("\n...Disengaging GravSweep...")   
+            search == search + 2  
 
     elif path == "repair":
         if  repair < 1:
