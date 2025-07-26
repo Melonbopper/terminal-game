@@ -43,7 +43,7 @@ while True:
 
         while True:
             action=input("\nType pull to bring in space debris, Type back to disengage the GravSweep:  ").strip().lower()
-            space_debris = random.randint(1, 16)
+            space_debris = random.randint(0, 7)
 
             if action == "pull":
 
@@ -51,7 +51,16 @@ while True:
                     print("\n=======================")
                     print("!GravSweep Overheated!")
                     print("=======================")
-                    pull = 0 # Reset pull count
+                    print("******************************************")
+                    print("You're getting tired...take a coffee break")
+                    print("******************************************")
+                    rest = input("\nType 'back' to return for coffee.  ")
+                    if rest == 'back':
+                        print() # blank line
+                        pull = 0 # Reset pull count
+                        break #forced exit to prevent spam
+                    else:
+                        print("You need caffine!")
 
                 elif pull == 0:
                         print("\n===============================")
@@ -62,10 +71,10 @@ while True:
                 elif pull == 1:
 
                     if space_debris % 5 == 0:
-                        print()
-                        looking = ("You found a [PHASE GEAR MANIFOLD!]") #Finally found it
-                        print()
+                        looking = ("\nYou found a [PHASE GEAR MANIFOLD!]") #Finally found it
                         print(looking)
+                        print("Finally...")
+                        print("\nGo 'back' to repair the ship!")
                         repair += 1
 
                     else:
@@ -90,12 +99,13 @@ while True:
                     search += 1
                     if search == 1:
                         print("\n==================================================")
-                        print("Damn...did the cabin climate interface go down?")
+                        print("The GravSweep feels warm...")
                         print("==================================================")
 
             elif action == "back":
                 print("\nGravSweep disengaged.")
                 break  # leave the search loop
+
             else:
                 print("Invalid GravSweep command.")
 
@@ -106,7 +116,7 @@ while True:
         else:
             print("\nInstalling [PHASE GEAR MANIFOLD]")
             print("....")
-            print("INSTALL COMPLETE!")
+            print("\nINSTALL COMPLETE!")
             ship_repaired += 1
             repair  -= 1
             
