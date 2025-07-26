@@ -30,60 +30,103 @@ repair = 0
 looking = 0
 pull = 0
 ship_repaired = 0
-space_debris = random.randint(1, 26)
-looking = ("You found a [PHASE GEAR MANIFOLD!]") #Finally found it
-
 
 while True:
-    print("\nsearch. repair. coffee. quit.")
-    path=input("\nWhat would you like to do?  ")
+    print("================================")
+    print("search, repair, coffee, quit")
+    print("================================")
+    path=input("\nWhat would you like to do?  ").strip().lower()
+    
     if path == "search":
         print("\n...Engaging GravSweep... ")
-        action=input("\nType pull to bring in space debris:  ")
-        if action == "pull" and space_debris % 3:
-            pull = pull + 1
-            print("===============================")
-            print("Damn...another Null Coil Cap")
-            print("===============================")
-        elif pull < 1:
-            pull = pull + 1
-            print("==============================================================")
-            print("Where would an Auxiliary Coupler Ring come from way out here?")
-            print("==============================================================")
-        elif pull >= 10:
-                print("=======================")
-                print("\nGravSweep Overheated")
-                pull = 0 # Reset pull count
-        elif pull >= 1 and space_debris % 5:
-            print(looking)
-            repair = repair + 1
-        elif pull >= 4:
-            search == search + 2  
+        action=input("\nType pull to bring in space debris:  ").strip().lower()
+        space_debris = random.randint(1, 16)
 
-    elif path == "repair":
-        if  repair < 1:
-            print("\nNo Parts Found")
-        else:
-            print("\nInstalling [PHASE GEAR MANIFOLD]")
-            print("....")
-            print("INSTALL COMPLETE!")
-            ship_repaired = ship_repaired + 1
+        if action == "pull":
+
+            if pull >=4:
+                print("=======================")
+                print("GravSweep Overheated")
+                print("=======================")
+                pull = 0 # Reset pull count
+
+            elif pull == 0:
+                    print("===============================")
+                    print("Damn...another Null Coil Cap")
+                    print("===============================")
+                    pull += 1
+
+            elif pull == 1:
+                if space_debris % 5 == 0:
+                    looking = ("You found a [PHASE GEAR MANIFOLD!]") #Finally found it
+                    print(looking)
+                else:
+                    print("==============================================================")
+                    print("Where would an Auxiliary Coupler Ring come from way out here?")
+                    print("==============================================================")
+                    pull += 1
+
+            elif pull == 2:
+                print("===============================================")
+                print("A Plasma Spooler? That's pretty cool to see...")
+                print("===============================================")
+                pull += 1
+
+            elif pull == 3:
+                print("============================================")
+                print("Huh? Looks like something really strange...")
+                print("============================================")
+                pull += 1
+                pull = 0 # Reset pull count
+
+            if pull == 4:
+                search += 1
+                if search == 1:
+                    print("Damn...I keep finding everything but phase gear manifold...")
+
+
+            elif path == "repair":
+                if  repair < 1:
+                    print("\nNo Parts Found")
+                else:
+                    print("\nInstalling [PHASE GEAR MANIFOLD]")
+                    print("....")
+                    print("INSTALL COMPLETE!")
+                    ship_repaired += 1
+                    repair  -= 1
+                    
+                    if ship_repaired >= 1:
+                        print("\n===============================")
+                        print("Captian...the ship has been fully repaired!")
+                        print("We can finally return to earth!")
+                        print("=================================")
+
+                        next_action = input("\nType 'earth' to return home:  ")
+                        if next_action == "earth":
+                            print("\nNavigation system engaged... Setting course for Earth.")
+                            print("Congratulations! You made  it home safely.")
+                            print("==== GAME OVER ====")
+                            break
 
     elif path == "coffee":
-        coffee_choice = (input("\nComputer: What kind of coffee would you like? " " Nebula Brew. Quantum Roast. Dark Matter Drip. Hyperfuel Espresso.   "))
-        if coffee_choice == "Nebula Brew.":
-            print("Nebula Brew selected. Infusing your cup with the silence of collapsing stars.")
-        elif coffee_choice == "Quantum Roast.":
-            print("Quantum Roast confirmed. Brewed simultaneously in the past and your impatient present.")
-        elif coffee_choice == "Dark Matter Drip.":
-            print("Dark Matter Drip engaged. Warning: gravitational pull may increase productivity.")
-        elif coffee_choice == "Hyperfuel Espresso.":
-            print("Hyperfuel Espresso incoming. Strap in--this shot bends local time.")
+        coffee_choice = input("\nComputer: What kind of coffee would you like? (Nebula Brew, Quantum Roast, Dark Matter Drip, Hyperfuel Espresso):  ").strip().lower()
 
-    elif quit:
-        if path == "quit":
+        print(f"{coffee_choice.title()}...processing order")
+
+        if coffee_choice == "nebula brew":
+            print("Nebula Brew selected. Infusing your cup with the silence of collapsing stars.")
+        elif coffee_choice == "quantum roast":
+            print("Quantum Roast confirmed. Brewed simultaneously in the past and your impatient present.")
+        elif coffee_choice == "dark matter drip":
+            print("Dark Matter Drip engaged. Warning: gravitational pull may increase productivity.")
+        elif coffee_choice == "hyperfuel espresso":
+            print("Hyperfuel Espresso incoming. Strap in--this shot bends local time.")
+        else:
+            print("Unknown brew. The replicator sputters uncertainly.")
+
+    elif path == "quit":
             print("Exiting game. Safe travels, captain.")
             break
 
     else:
-        print("\nWhat are you doing? You have no other choice but to say one of 4 options...")
+        print("\nCommand Error: Syntax anomaly detected.")
