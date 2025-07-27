@@ -1,7 +1,7 @@
 #Start of a simple terminal game in Python
-#This game wil be a text-based space adventure game
-#The player will search for items through space to obtain parts to fix the spaceship
-#Once repaired the player can then choose to send player into space or return to earth
+#This game will be a text-based space adventure game
+#The player will search for items through space to obtain the part needed to fix the spaceship
+#Once repaired the player can then return to earth
 #The game will be played in the terminal
 
 import random
